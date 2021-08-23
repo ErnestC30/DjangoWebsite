@@ -1,0 +1,46 @@
+{% extends "website/base.html" %} 
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %} Recent Activity {% endblock %}
+{% block head %} 
+<link rel="stylesheet" type="text/css" href="{% static 'website/view_post.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'website/view_comments.css' %}">
+{% endblock %}
+{% block content %}
+<div class='media-post'>
+    <div id='media-container'>
+        {% if media.type == 'image' %}
+        <img class='media-thumbnail' src="{{ media.media.url }}">
+        {% elif media.type == 'video' %}
+        <video class='media-thumbnail' controls><source src="{{ media.media.url }}" type="video/mp4">Video not available</video>
+        {% else %}
+        <p>Error with media type.</p>
+        {% endif %}
+    </div>
+    <div class='text-box'>
+        <p class='media-title'>{{ media.title }}</p>
+        <p class='media-author'>Uploaded by: 
+            <a class='user-href' href="{% url 'view-profile' media.author.id %}">{{ media.author }}</a></p>
+        <p class='media-desc'>{{ media.description }}</p>
+    </div>
+</div>
+
+<!--Create textbox here on click? Needs javascript?-->
+<form method="POST" enctype='multipart/form-data'>
+    {% csrf_token %}
+    <p>Post a comment:</p>
+    {{ post_form|crispy }}
+    <button class="btn btn-outline-info" type="submit">Post Comment</button>
+</form>
+
+<div class='comments-container'>
+    {% for post in posts %}
+    <div class='comment-block'>
+        <img class='comment-pic' src='{{ post.author.image.url }}'>
+        <p class='comment-username'> <a class='user-href' href="{% url 'view-profile' post.author.id %}">
+            {{ post.author.user.username }}</a></p>
+        <p class='comment-content'>{{ post.content }}</p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

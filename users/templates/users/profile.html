@@ -1,0 +1,14 @@
+{% extends "website/base.html" %} 
+{% load static %} 
+{% block title %} Profile {% endblock %}
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'users/profile.css' %}">
+{% endblock %} 
+{% block content %} 
+<h1>Recent Activity</h1>
+<div class='user-info'>
+    <img class='display_pic' src='{{ user.profile.image.url }}'>
+    <p class='user-name'>User: {{ user.username }}</p>
+    <p class='user-desc'>Description goes here</p>
+</div>
+{% endblock %}

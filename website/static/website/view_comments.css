@@ -1,0 +1,42 @@
+/* Styling for user comments */
+.comments-container {
+    display: flex;
+    flex-direction: column-reverse;
+    margin-bottom: 10px;
+}
+
+.comment-block {
+    border: 2px;
+    border-style: groove;
+    margin: 5px;
+}
+
+.comment-pic {
+    width: 75px;
+    height: 75px;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+    float: left;
+    margin: 10px;
+}
+
+.comment-username {
+    font-size: 120%;
+    margin-top: 8px;
+    margin-bottom: 4px;
+}
+
+.comment-content {
+    padding: 5px;
+    text-align: justify;
+}
+
+.user-href {
+    color: black;
+    text-decoration: none;
+}
+
+.user-href:hover {
+    text-decoration: line;
+}

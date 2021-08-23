@@ -1,0 +1,29 @@
+{% extends "website/base.html" %} 
+{% load static %}
+{% block title %} Recent Activity {% endblock %}
+{% block head %} 
+<link rel="stylesheet" type="text/css" href="{% static 'website/recent_activity.css' %}">
+{% endblock %} 
+{% block content %} 
+<h1>Recent Activity</h1>
+<div class='media-container'>
+{% for media in media_list %} 
+    <div class='media-post'>
+        {% if media.type == 'image' %}
+        <img class='media-thumbnail' src="{{ media.media.url }}">
+        {% elif media.type == 'video' %}
+        <video class='media-thumbnail' controls><source src="{{ media.media.url }}" type="video/mp4">Video not available</video>
+        {% else %}
+        <p>Error with media type.</p>
+        {% endif %}
+        <p class='media-title'><a class='post-link' href="{% url 'view-post' media.id %}">{{ media.title }}</a></p>
+        <p class='media-author'>Uploaded by:
+            <a class='user-href' href="{% url 'view-profile' media.author.id %}">{{ media.author }}</a>
+        </p>
+        <div class='text-box'>
+            <p class='media-desc'>{{ media.description }}</p>
+        </div>
+    </div>
+{% endfor %}
+</div>
+{% endblock %}

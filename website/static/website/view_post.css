@@ -1,0 +1,42 @@
+/* CSS for the actual post */
+.media-post {
+    border: 2px;
+    border-style: groove;
+    margin: 5px;
+}
+
+#media-container {  
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+}
+
+.media-thumbnail {
+    width: 100%;
+    height: auto;
+    padding: 5px;
+}
+
+.text-box {
+    margin-left: 5px;
+}
+
+.media-title {
+    font-size: 200%;
+    margin-bottom: 0px;
+}
+
+.media-author {
+    font-size: 80%;
+    color: rgb(40, 40, 40);
+    margin-bottom: 5px;
+}
+
+.user-href {
+    color: black;
+    text-decoration: none;
+}
+
+.user-href:hover {
+    text-decoration: line;
+}
