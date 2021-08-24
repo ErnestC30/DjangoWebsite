@@ -56,9 +56,24 @@ def view_post(request, post_id):
     post_form =  PostForm(instance=request.user)
     context = {'media': media,
                'posts': posts,
-               'post_form': post_form}
+               'post_form': post_form,
+               'current_user': request.user}
 
     return render(request, 'website/view_post.html', context)
+
+@login_required
+def delete_comment(request, post_id):
+
+    comment = Post.objects.filter(id=post_id).first()
+    posted_to_id = comment.posted_to_id
+
+    if request.user.id == comment.author_id:
+        comment.delete()
+        messages.success(request, f'Your comment has been deleted.')
+    else:
+        messages.warning(request, f'Don\'t delete other\'s comments.')
+
+    return redirect('view-post', posted_to_id)
 
 #Determine if uploaded file is an image or video.
 def getFileType(filename):

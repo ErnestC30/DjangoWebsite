@@ -22,6 +22,9 @@
         <p class='media-author'>Uploaded by: 
             <a class='user-href' href="{% url 'view-profile' media.author.id %}">{{ media.author }}</a></p>
         <p class='media-desc'>{{ media.description }}</p>
+        {% if current_user.id == post.author.id %}
+            <a class='user-href delete-comment'  href="{% url 'delete-comment' post.id %}">Delete</a>
+        {% endif %}
     </div>
 </div>
 
@@ -40,6 +43,9 @@
         <p class='comment-username'> <a class='user-href' href="{% url 'view-profile' post.author.id %}">
             {{ post.author.user.username }}</a></p>
         <p class='comment-content'>{{ post.content }}</p>
+        {% if current_user.id == post.author.id %}
+            <a class='user-href delete-comment'  href="{% url 'delete-comment' post.id %}">Delete</a>
+        {% endif %}
     </div>
     {% endfor %}
 </div>

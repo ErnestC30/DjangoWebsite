@@ -6,6 +6,7 @@
 }
 
 .comment-block {
+    position: relative;
     border: 2px;
     border-style: groove;
     margin: 5px;
@@ -39,4 +40,12 @@
 
 .user-href:hover {
     text-decoration: line;
+}
+
+.delete-comment {
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    margin: 2px;
+    color: rgb(150, 149, 149);
 }
