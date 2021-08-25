@@ -39,3 +39,12 @@
     color: rgb(40, 40, 40);
     margin-bottom: 5px;
 }
+
+.user-href {
+    color: black;
+    text-decoration: none;
+}
+
+.user-href:hover {
+    text-decoration: line;
+}

@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from django.contrib import messages
 from .forms import MediaForm, PostForm
 from django.contrib.auth.decorators import login_required
+import json
 
 
 def home(request):
@@ -45,19 +46,30 @@ def view_post(request, post_id):
     posts = Post.objects.filter(posted_to_id=post_id)
 
     if request.method == "POST":
-        post_form = PostForm(request.POST)
-        if post_form.is_valid():
-            form = post_form.save(commit=False)
-            form.author = request.user.profile
-            form.posted_to = media
-            form.save()
-            return redirect('view-post', post_id)
+        body_unicode = request.body.decode('utf-8')
+        body = json.loads(body_unicode)
+        
+        if body['type'] == 'delete_post':
+            media = Media.objects.filter(id=body['media_id']).first()
+            media.delete()
+            return HttpResponse('200')
+
+        else:
+            post_form = PostForm(request.POST)
+            if post_form.is_valid():
+                form = post_form.save(commit=False)
+                form.author = request.user.profile
+                form.posted_to = media
+                form.save()
+                return redirect('view-post', post_id)
 
     post_form =  PostForm(instance=request.user)
     context = {'media': media,
                'posts': posts,
                'post_form': post_form,
-               'current_user': request.user}
+               'current_user': request.user,
+               'previous_page': request.META['HTTP_REFERER']
+               }
 
     return render(request, 'website/view_post.html', context)
 
@@ -83,3 +95,4 @@ def getFileType(filename):
         return 'video'
     else:
         return 'invalid'
+

@@ -1,4 +1,11 @@
-.user-info img {
+.user-info {
+    width: 100%;
+    height: auto;
+    position: relative;
+    padding-top: 20px;
+}
+
+.display-pic {
     width: 200px;
     height: 200px;
     object-fit: cover;
@@ -13,6 +20,10 @@
     font-size: 30px;
 }
 
-.feed {
-    position: relative;
-} 
+.profile-media-container {
+    width: 100%;
+    padding-top: 150px;
+    position: absolute;
+    display: flex;
+    flex-direction: column-reverse;
+}

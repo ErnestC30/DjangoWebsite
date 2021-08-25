@@ -3,6 +3,7 @@
 {% load crispy_forms_tags %}
 {% block title %} Recent Activity {% endblock %}
 {% block head %} 
+<script src="{% static 'website/view_post.js' %}"></script> 
 <link rel="stylesheet" type="text/css" href="{% static 'website/view_post.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'website/view_comments.css' %}">
 {% endblock %}
@@ -22,8 +23,8 @@
         <p class='media-author'>Uploaded by: 
             <a class='user-href' href="{% url 'view-profile' media.author.id %}">{{ media.author }}</a></p>
         <p class='media-desc'>{{ media.description }}</p>
-        {% if current_user.id == post.author.id %}
-            <a class='user-href delete-comment'  href="{% url 'delete-comment' post.id %}">Delete</a>
+        {% if current_user.id == media.author.id %}
+            <button onclick="delete_post('view_post', '{{ media.id }}', '{{ previous_page }}')">Delete</a>
         {% endif %}
     </div>
 </div>

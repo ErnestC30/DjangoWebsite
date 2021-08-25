@@ -4,6 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import UserUpdateForm, ProfileUpdateForm
+from website.models import Media, Post
 
 #Page to create a new account
 def register(request):
@@ -25,7 +26,7 @@ def recent_activity(request):
 
 #Page for user to view their own account, make changes to name or change picture.
 @login_required
-def myprofile(request):
+def my_profile(request):
     if request.method == "POST":
         user_form = UserUpdateForm(request.POST, instance=request.user)
         profile_form = ProfileUpdateForm(request.POST,
@@ -52,6 +53,8 @@ def myprofile(request):
 #Page to view any user's profile.
 def view_profile(request, user_id):
     user = get_object_or_404(User, pk=user_id)
-    context = {'user': user}
+    media_list = Media.objects.filter(author_id=user_id)
+    context = {'user': user,
+               'media_list': media_list}
 
     return render(request, 'users/profile.html', context)
