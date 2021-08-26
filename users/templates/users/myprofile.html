@@ -7,24 +7,23 @@
 {% endblock %} 
 {% block content %} 
 <div class='user-info'>
-    <img class='display_pic' src='{{ user.profile.image.url }}'>
+    <img class='display-pic' src='{{ user.profile.image.url }}'>
     <p class='user-name'>User: {{ user.username }}</p>
     <p class='user-desc'>Description goes here</p>
-</div>
-<!--Need to make this section below image-->
-<div class='edit-profile'>
-    <p>Edit Account Info</p>
-    <form method="POST" enctype='multipart/form-data'>
-        {% csrf_token %}
-        <fieldset class='form-group'>
+    <div class='edit-profile'>
+        <p>Edit Account Info</p>
+        <form method="POST" enctype='multipart/form-data'>
+            {% csrf_token %}
+            <fieldset class='form-group'>
+                <div class="form-group">
+                    {{ user_form|crispy }}
+                    {{ profile_form|crispy }}
+                </div>
+            </fieldset>
             <div class="form-group">
-                {{ user_form|crispy }}
-                {{ profile_form|crispy }}
+                <button class="btn btn-outline-info" type="submit">Submit Changes</button>
             </div>
-        </fieldset>
-        <div class="form-group">
-            <button class="btn btn-outline-info" type="submit">Submit Changes</button>
-        </div>
-    </form>
+        </form>
+    </div>
 </div>
 {% endblock %}

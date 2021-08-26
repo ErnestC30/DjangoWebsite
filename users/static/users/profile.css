@@ -27,3 +27,8 @@
     display: flex;
     flex-direction: column-reverse;
 }
+
+.edit-profile {
+    position: absolute;
+    padding-top: 150px;
+}
