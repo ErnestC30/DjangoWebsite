@@ -7,8 +7,6 @@ from website.models import Content, Media, Post
 @receiver(post_save, sender=Media)
 @receiver(post_save, sender=Post)
 def create_content(sender, instance, created, **kwargs):
-    pass
-    """
     if created:
         try:
             content_type = ContentType.objects.get_for_model(instance)
@@ -22,18 +20,15 @@ def create_content(sender, instance, created, **kwargs):
         
         except:
             print('error')
-    """
+
 
 
 @receiver(post_delete, sender=Media)
 @receiver(post_delete, sender=Post)
 def delete_content(sender, instance, **kwargs):
-    pass
-"""
     try:
         content = Content.objects.filter(object_id=instance.id).first()
         content.delete()
         print('content deleted')
     except:
         print('error')
-"""

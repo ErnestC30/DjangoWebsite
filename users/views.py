@@ -4,7 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import UserUpdateForm, ProfileUpdateForm
-from website.models import Media, Post
+from website.models import Media, Post, Content
 
 #Page to create a new account
 def register(request):

@@ -69,10 +69,9 @@ def view_post(request, post_id):
         #Delete the entire Media upload.
         if 'type' in data:
             if data['type'] == 'delete_media':
-                print('deleting')
                 media = Media.objects.filter(id=data['media_id']).first()
                 media.delete()
-                #post_delete.connect(delete_content, sender=Media)
+                post_delete.connect(delete_content, sender=Media)
                 return HttpResponse('200')
 
         else:
