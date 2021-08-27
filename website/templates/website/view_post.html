@@ -24,7 +24,7 @@
             <a class='user-href' href="{% url 'view-profile' media.author.id %}">{{ media.author }}</a></p>
         <p class='media-desc'>{{ media.description }}</p>
         {% if current_user.id == media.author.id %}
-            <button onclick="delete_post('view_post', '{{ media.id }}', '{{ previous_page }}')">Delete</a>
+            <button onclick="delete_post('{{ media.id }}', '{{ previous_page }}')">Delete</a>
         {% endif %}
     </div>
 </div>

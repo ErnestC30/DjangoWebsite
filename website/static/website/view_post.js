@@ -15,19 +15,24 @@ function getCookie(name) {
 }
 const csrftoken = getCookie('csrftoken');
 
-function delete_post(url, media_id, redirect_link) {
-    var delete_confirm = confirm("Are you sure you want to delete this post?");
+async function delete_post(media_id, redirect_link) {
     console.log(redirect_link)
+    var delete_confirm = confirm("Are you sure you want to delete this post?");
+    
     if (delete_confirm) {
-        fetch(media_id, {
+        var response = await fetch(media_id, {
             method: 'POST',
-            headers: {'X-CSRFToken': csrftoken},
-            body: JSON.stringify({'type': 'delete_post',
-                                  'media_id': media_id}) 
-            }
+            headers: {
+                'X-CSRFToken': csrftoken,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                'type': 'delete_media',
+                'media_id': media_id
+            })
+        }
         )
-        .then(response => response)
-        .then(window.location.replace(redirect_link))
-        .catch(error => console.log(error))
+        window.location.assign(redirect_link)
+        window.location.reload
     }
 }

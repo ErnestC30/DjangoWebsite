@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'website.apps.WebsiteConfig',
     'users.apps.UsersConfig',
     'crispy_forms',
+    'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -139,3 +140,5 @@ LOGIN_URL = 'login'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+
