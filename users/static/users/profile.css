@@ -1,3 +1,4 @@
+/* CSS for user's profile and description. */
 .user-info {
     width: 100%;
     height: auto;
@@ -20,6 +21,13 @@
     font-size: 30px;
 }
 
+.edit-profile {
+    position: absolute;
+    padding-top: 150px;
+}
+
+/* CSS flexbox container for profile page. */
+
 .profile-media-container {
     width: 100%;
     padding-top: 150px;
@@ -28,7 +36,29 @@
     flex-direction: column-reverse;
 }
 
-.edit-profile {
-    position: absolute;
-    padding-top: 150px;
+/* CSS for user's comment posts. */
+
+.comment-post {
+    border: 2px;
+    border-style: groove;
+    margin: 5px;
+}
+
+.comment-picture {
+    max-width: 20%;
+    height: auto;
+    float: left;
+    margin: 10px;
+}
+
+.comment-info {
+    padding-top: 8px;
+    margin-bottom: 2px;
+    color: rgb(90, 90, 90);
+    font-size: 80%;
+}
+
+.comment {
+    padding: 5px;
+    text-align: left;
 }

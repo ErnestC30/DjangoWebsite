@@ -5,6 +5,8 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import UserUpdateForm, ProfileUpdateForm
 from website.models import Media, Post, Content
+from django.contrib.contenttypes.models import ContentType
+
 
 #Page to create a new account
 def register(request):
@@ -53,8 +55,8 @@ def my_profile(request):
 #Page to view any user's profile.
 def view_profile(request, user_id):
     user = get_object_or_404(User, pk=user_id)
-    media_list = Media.objects.filter(author_id=user_id)
+    content_list = Content.objects.filter(author_id=user_id)
     context = {'user': user,
-               'media_list': media_list}
+               'content_list': content_list}
 
     return render(request, 'users/profile.html', context)

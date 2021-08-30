@@ -10,7 +10,7 @@
 }
 
 .media-thumbnail {
-    max-width: 500px;
+    max-width: 45%;
     height: auto;
     float: left;
     margin: 10px;
