@@ -9,7 +9,7 @@
 <div class='user-info'>
     <img class='display-pic' src='{{ user.profile.image.url }}'>
     <p class='user-name'>User: {{ user.username }}</p>
-    <p class='user-desc'>Description goes here</p>
+    <p class='user-desc'> {{ user.profile.description }}</p>
     <div class='edit-profile'>
         <p>Edit Account Info</p>
         <form method="POST" enctype='multipart/form-data'>

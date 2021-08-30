@@ -28,9 +28,15 @@
 
 /* CSS flexbox container for profile page. */
 
+.user-feed {
+    position:relative;
+    padding-top: 70px;
+}
+
+
 .profile-media-container {
     width: 100%;
-    padding-top: 150px;
+    padding-top: 50px;
     position: absolute;
     display: flex;
     flex-direction: column-reverse;
@@ -44,7 +50,7 @@
     margin: 5px;
 }
 
-.comment-picture {
+.comment-media {
     max-width: 20%;
     height: auto;
     float: left;

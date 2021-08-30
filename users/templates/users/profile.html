@@ -9,8 +9,9 @@
 <div class='user-info'>
     <img class='display-pic' src='{{ user.profile.image.url }}'>
     <p class='user-name'>User: {{ user.username }}</p>
-    <p class='user-desc'>Description goes here</p>
-
+    <p class='user-desc'>{{ user.profile.description }}</p>
+</div>
+<div class='user-feed'>
     <div class='profile-media-container'>
         {% for content in content_list %} 
             {% if content.content_type.name == 'media' %}
@@ -27,7 +28,6 @@
                 {% else %}
                 <p>Error with media type.</p>
                 {% endif %}
-                <p class='media-title'><a class='post-link' href="{% url 'view-post' media.id %}">{{ media.title }}</a></p>
                 <div class='text-box'>
                     <p class='media-desc'>{{ media.description }}</p>
                 </div>
@@ -37,8 +37,14 @@
             {% elif content.content_type.name == 'post' %}
             {% with content|return_object as post %}
             <div class='comment-post'>
-                <div class='comment-media-info'>
-                    <img class='comment-picture' src="{{ post.posted_to.media.url }}">
+                <div class='comment-media-info'> 
+                    {% if post.posted_to.type == 'image' %}
+                    <img class='comment-media' src="{{ post.posted_to.media.url }}">
+                    {% elif post.posted_to.type == 'video' %}
+                    <video class='comment-media' controls>
+                        <source src="{{ post.posted_to.media.url }}" type="video/mp4">Video not available
+                    </video>
+                    {% endif %}
                     <p class='comment-info'>Commented on: <a class='post-link' href="{% url 'view-post' post.posted_to.id %}">{{ post.posted_to.title }}</a></p>
                 </div>
                 <div class='comment'>
@@ -48,7 +54,6 @@
             {% endwith %}
             {% endif %}
             {% endfor %}
-
             <h1>User Feed</h1>
     </div>
 </div>
