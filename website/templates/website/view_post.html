@@ -29,13 +29,17 @@
     </div>
 </div>
 
-<!--Create textbox here on click? Needs javascript?-->
+<!--Allow logged in users to comment on the media post. -->
+{% if user.is_authenticated %}
 <form method="POST" enctype='multipart/form-data'>
     {% csrf_token %}
     <p>Post a comment:</p>
     {{ post_form|crispy }}
     <button class="btn btn-outline-info" type="submit">Post Comment</button>
 </form>
+{% else %} 
+<p></p><a class='user-href' href="{% url 'login' %}">Log in now to comment on post.</a></p>
+{% endif %}
 
 <div class='comments-container'>
     {% for post in posts %}

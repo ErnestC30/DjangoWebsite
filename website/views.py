@@ -85,11 +85,8 @@ def view_post(request, post_id):
                 post_save.connect(create_content, sender=Post)
                 return redirect('view-post', post_id)
 
-    print(request.session.get('prev_page'))
-
-
     #Default page GET rendering.
-    post_form =  PostForm(instance=request.user)
+    post_form =  PostForm()
     context = {'media': media,
                'posts': posts,
                'post_form': post_form,
