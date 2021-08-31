@@ -26,4 +26,13 @@
     </div>
 {% endfor %}
 </div>
+<div class='page-buttons'>
+    {% for page in page_range %}
+        {% if page == "…" %}
+        <button type="button" class='btn btn-primary'>{{ page }}</button>
+        {% else %} 
+        <a href='?page={{ page }}' class='btn btn-primary'>{{ page }}</a>
+        {% endif %}
+    {% endfor %}
+</div>
 {% endblock %}

@@ -1,5 +1,6 @@
 /* CSS for the actual post */
 .media-post {
+    position: relative;
     border: 2px;
     border-style: groove;
     margin: 5px;
@@ -39,4 +40,10 @@
 
 .user-href:hover {
     text-decoration: line;
+}
+
+.delete-button {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
 }

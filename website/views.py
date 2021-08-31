@@ -2,18 +2,14 @@ from website.models import Media, Post
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib import messages
-from django.urls import reverse, resolve
 from django.db.models.signals import post_save, post_delete
 from website.signals import create_content, delete_content
 from .forms import MediaForm, PostForm
 from django.contrib.auth.decorators import login_required
-import json
-
-from django.http import HttpResponse, JsonResponse
+from django.core.paginator import InvalidPage, Paginator
+from django.http import HttpResponse
 from rest_framework.parsers import FormParser, JSONParser, MultiPartParser
-from rest_framework.decorators import parser_classes
-from rest_framework.decorators import api_view
-
+from rest_framework.decorators import parser_classes, api_view
 
 
 def home(request):
@@ -46,8 +42,18 @@ def upload(request):
 
 #Page for users to see all recent uploads, click on post to comment/read comments.
 def recent_activity(request):
-    media_list = Media.objects.all()
-    context = {'media_list': media_list}
+    media_list = Media.objects.all().order_by('-id')
+    paginator = Paginator(media_list, 5)
+    page_num = request.GET.get('page', 1)
+    try:
+        current_page = paginator.page(page_num)
+    except InvalidPage:
+        current_page = paginator.page(1)
+    page_range = paginator.get_elided_page_range(current_page.number, on_each_side=2)
+
+    #Passing the Page object containing a list of Media objects.
+    context = {'media_list': current_page,
+               'page_range': page_range}
     return render(request, 'website/recent_activity.html', context)
 
 #View individual posts, and allow for commenting on post.

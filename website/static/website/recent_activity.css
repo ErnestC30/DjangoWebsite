@@ -1,6 +1,6 @@
 .media-container {
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
 }
 
 .media-post {
@@ -47,4 +47,20 @@
 
 .user-href:hover {
     text-decoration: line;
+}
+
+.page-buttons {
+    margin: 10px;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #6bbbd8;
+    border-color: #357ebd; /*set the color you want here*/
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active {
+    color: #fff;
+    background-color: #0b505f;
+    border-color: #285e8e; /*set the color you want here*/
 }

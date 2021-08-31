@@ -4,6 +4,7 @@
     height: auto;
     position: relative;
     padding-top: 20px;
+    overflow:hidden;
 }
 
 .display-pic {
@@ -33,13 +34,12 @@
     padding-top: 70px;
 }
 
-
 .profile-media-container {
     width: 100%;
-    padding-top: 50px;
-    position: absolute;
+    padding-top: 30px;
+    position: relative;
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
 }
 
 /* CSS for user's comment posts. */

@@ -22,7 +22,6 @@ def create_content(sender, instance, created, **kwargs):
             print('error')
 
 
-
 @receiver(post_delete, sender=Media)
 @receiver(post_delete, sender=Post)
 def delete_content(sender, instance, **kwargs):
