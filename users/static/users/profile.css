@@ -4,7 +4,6 @@
     height: auto;
     position: relative;
     padding-top: 20px;
-    overflow:hidden;
 }
 
 .display-pic {
@@ -20,11 +19,28 @@
 .user-name {
     margin-left: 20px;
     font-size: 30px;
+    margin-bottom: 5px;
+}
+
+.href-url {
+    color: rgb(153, 153, 153);
+    text-decoration: none;
+}
+
+.href-url:hover {
+    text-decoration: line;
+}
+
+.user-description {
+    min-height: 100px;
+    padding-top: 20px;
 }
 
 .edit-profile {
     position: absolute;
-    padding-top: 150px;
+    width: 100%;
+    padding-top: 50px;
+    padding-bottom: 20px;
 }
 
 /* CSS flexbox container for profile page. */

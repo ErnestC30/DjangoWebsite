@@ -2,5 +2,21 @@
 {% block title %} Home Page {% endblock %}
 {% block head %} {% endblock %} 
 {% block content %} 
-<h1>Home Page</h1>
+<div class='welcome'>
+    <h1>Home Page</h1>
+    {% if user.is_authenticated %}
+        <p>Welcome {{ user.username }}</p>
+    {% else %}
+        <p><a href="{% url 'register' %}">Create an account to start uploading and commenting on posts.</a></p>
+    {% endif %}
+</div>
+<div class='introduction'>
+    <p>View recent user uploads in the Recent Activity section.</p>
+    <p>Click on a user's upload title to comment on it.</p>
+    <p>Click on a user's name to view their profile and see their recent activity.</p>
+    {% if user.is_authenticated %} 
+        <p>Upload any image, gif, or video file to the website.</p>
+        <p>Visit 'Profile' to edit your account details and change display picture.</p>
+    {% endif %}
+</div>
 {% endblock %}

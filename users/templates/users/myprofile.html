@@ -9,9 +9,10 @@
 <div class='user-info'>
     <img class='display-pic' src='{{ user.profile.image.url }}'>
     <p class='user-name'>User: {{ user.username }}</p>
-    <p class='user-desc'> {{ user.profile.description }}</p>
+    <a class='href-url' href="{% url 'view-profile' user.id  %}">View your recent activity</a>
+    <p class='user-description'> {{ user.profile.description }}</p>
     <div class='edit-profile'>
-        <p>Edit Account Info</p>
+        <h1>Edit Account Profile</h1>
         <form method="POST" enctype='multipart/form-data'>
             {% csrf_token %}
             <fieldset class='form-group'>
