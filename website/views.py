@@ -11,12 +11,17 @@ from django.http import HttpResponse
 from rest_framework.parsers import FormParser, JSONParser, MultiPartParser
 from rest_framework.decorators import parser_classes, api_view
 
+CONTENT_PER_PAGE = 5
+DEFAULT_PAGE = 1
+PAGE_RANGE = 2
 
 def home(request):
     return render(request, 'website/home.html')
 
 @login_required
 def upload(request):
+    """Upload an image or video as a Media object to the database.
+       Accepts .jpg, .png, .gif for images and .mp4, .webm for videos"""
     if request.method == "POST":
         media_form = MediaForm(request.POST, 
                                request.FILES)
@@ -28,7 +33,6 @@ def upload(request):
             form.author = request.user
             form.save()
             post_save.connect(create_content, sender=Media)
-            
             messages.success(request, f'Your file has been uploaded.')
             return redirect('web-media-upload')
         else:
@@ -40,28 +44,27 @@ def upload(request):
         
     return render(request, 'website/upload.html', context)
 
-#Page for users to see all recent uploads, click on post to comment/read comments.
 def recent_activity(request):
+    """Page for users to see all recent uploads, click on post to comment/read comments."""
     media_list = Media.objects.all().order_by('-id')
-    paginator = Paginator(media_list, 5)
-    page_num = request.GET.get('page', 1)
+    paginator = Paginator(media_list, CONTENT_PER_PAGE)
+    page_num = request.GET.get('page', DEFAULT_PAGE)
     try:
         current_page = paginator.page(page_num)
     except InvalidPage:
-        current_page = paginator.page(1)
-    page_range = paginator.get_elided_page_range(current_page.number, on_each_side=2)
+        current_page = paginator.page(DEFAULT_PAGE)
+    page_range = paginator.get_elided_page_range(current_page.number, on_each_side=PAGE_RANGE)
 
     #Passing the Page object containing a list of Media objects.
     context = {'media_list': current_page,
                'page_range': page_range}
     return render(request, 'website/recent_activity.html', context)
 
-#View individual posts, and allow for commenting on post.
-#Note: breaks when not logged in.
 @api_view(['GET', 'POST'])
 @parser_classes([JSONParser, FormParser, MultiPartParser])
 def view_post(request, post_id):
-
+    """View individual posts, and allow for commenting on post while logged in.
+       The user can also view other user's profiles by clicking their names."""
     media = Media.objects.filter(id=post_id).first()
     posts = Post.objects.filter(posted_to_id=post_id)
 
@@ -72,7 +75,7 @@ def view_post(request, post_id):
     if request.method == "POST":
         data = request.data
 
-        #Delete the entire Media upload.
+        #Deletes the entire Media object when requested.
         if 'type' in data:
             if data['type'] == 'delete_media':
                 media = Media.objects.filter(id=data['media_id']).first()
@@ -104,7 +107,7 @@ def view_post(request, post_id):
 
 @login_required
 def delete_comment(request, post_id):
-    #Deleting post comment on an upload.
+    """Deleting post comment on an upload"""
 
     comment = Post.objects.filter(id=post_id).first()
     posted_to_id = comment.posted_to_id
@@ -118,8 +121,8 @@ def delete_comment(request, post_id):
 
     return redirect('view-post', posted_to_id)
 
-#Determine if uploaded file is an image or video.
 def getFileType(filename):
+    """Determine if uploaded file is an image or video."""
     if filename.endswith('.jpg') or filename.endswith('.png') or filename.endswith('.gif'):
         return 'image'
     elif filename.endswith('.mp4') or filename.endswith('.webm'):

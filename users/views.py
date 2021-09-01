@@ -8,9 +8,12 @@ from .forms import UserUpdateForm, ProfileUpdateForm
 from website.models import Media, Post, Content
 from django.contrib.contenttypes.models import ContentType
 
+CONTENT_PER_PAGE = 5
+DEFAULT_PAGE = 1
+PAGE_RANGE = 2
 
-#Page to create a new account
 def register(request):
+    """Creates a new User and Profile object."""
     if request.method == "POST":
         form = UserCreationForm(request.POST)
         if form.is_valid():
@@ -23,9 +26,9 @@ def register(request):
     
     return render(request, 'users/register.html', {'form': form})
 
-#Page for user to view their own account, make changes to name or change picture.
 @login_required
 def my_profile(request):
+    """Allow user to view their own profile, and change username, picture, or description."""
     if request.method == "POST":
         user_form = UserUpdateForm(request.POST, instance=request.user)
         profile_form = ProfileUpdateForm(request.POST,
@@ -41,7 +44,6 @@ def my_profile(request):
     else:
         user_form = UserUpdateForm(instance=request.user)
         profile_form = ProfileUpdateForm(instance=request.user.profile)
-
         context = {
             'user_form': user_form,
             'profile_form': profile_form
@@ -49,17 +51,18 @@ def my_profile(request):
 
         return render(request, 'users/myprofile.html', context)
 
-#Page to view any user's profile.
 def view_profile(request, user_id):
+    """Allow user to view another user's profile, and showing their upload and comments."""
     user = get_object_or_404(User, pk=user_id)
     content_list = Content.objects.filter(author_id=user_id).order_by('-id')
-    paginator = Paginator(content_list, 5)
-    page_num = request.GET.get('page', 1)
+    paginator = Paginator(content_list, CONTENT_PER_PAGE)
+    page_num = request.GET.get('page', DEFAULT_PAGE)
+    #Default to page 1 if GET returns out of bounds page.
     try:
         current_page = paginator.page(page_num)
     except InvalidPage:
-        current_page = paginator.page(1)
-    page_range = paginator.get_elided_page_range(current_page.number, on_each_side=2)
+        current_page = paginator.page(DEFAULT_PAGE)
+    page_range = paginator.get_elided_page_range(current_page.number, on_each_side=PAGE_RANGE)
 
     context = {'user': user,
                'content_list': current_page,

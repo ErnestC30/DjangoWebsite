@@ -7,17 +7,15 @@ from website.models import Content, Media, Post
 @receiver(post_save, sender=Media)
 @receiver(post_save, sender=Post)
 def create_content(sender, instance, created, **kwargs):
+    """Creates a Content object corresponding to a newly created Media or Post object."""
     if created:
         try:
             content_type = ContentType.objects.get_for_model(instance)
             author_id = instance.author.id
-
             content = Content(content_type=content_type,
                             object_id=instance.id,
                             author_id=author_id)
             content.save()
-            print('content saved')
-        
         except:
             print('error')
 
@@ -25,6 +23,7 @@ def create_content(sender, instance, created, **kwargs):
 @receiver(post_delete, sender=Media)
 @receiver(post_delete, sender=Post)
 def delete_content(sender, instance, **kwargs):
+    """Deletes the Content object when the corresponding Media or Post object is deleted."""
     try:
         content = Content.objects.filter(object_id=instance.id).first()
         content.delete()

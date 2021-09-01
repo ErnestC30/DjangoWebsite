@@ -5,7 +5,7 @@
 {% block head %}
 <link rel="stylesheet" type="text/css" href="{% static 'users/profile.css' %}">
 {% endblock %} 
-{% block content %} 
+{% block content %}
 <div class='user-info'>
     <img class='display-pic' src='{{ user.profile.image.url }}'>
     <p class='user-name'>User: {{ user.username }}</p>

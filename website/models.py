@@ -22,8 +22,8 @@ class Post(models.Model):
     def __str__(self):
         return self.content
 
-#Container for all media and post uploaded.
 class Content(models.Model):
+    """Container for all media and post uploaded."""
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
     object_id = models.PositiveIntegerField()
     content_object = GenericForeignKey('content_type', 'object_id')

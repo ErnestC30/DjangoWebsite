@@ -4,7 +4,6 @@ function getCookie(name) {
         const cookies = document.cookie.split(';');
         for (let i = 0; i < cookies.length; i++) {
             const cookie = cookies[i].trim();
-            // Does this cookie string begin with the name we want?
             if (cookie.substring(0, name.length + 1) === (name + '=')) {
                 cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
                 break;
@@ -16,7 +15,7 @@ function getCookie(name) {
 const csrftoken = getCookie('csrftoken');
 
 async function delete_post(media_id, redirect_link) {
-    console.log(redirect_link)
+    /* Delete the given Media object and returns to the previous page. */
     var delete_confirm = confirm("Are you sure you want to delete this post?");
     
     if (delete_confirm) {

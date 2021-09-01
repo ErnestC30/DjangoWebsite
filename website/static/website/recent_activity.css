@@ -10,7 +10,7 @@
 }
 
 .media-thumbnail {
-    max-width: 45%;
+    max-width: 45%; 
     height: auto;
     float: left;
     margin: 10px;
@@ -56,11 +56,11 @@
 .btn-primary {
     color: #fff;
     background-color: #6bbbd8;
-    border-color: #357ebd; /*set the color you want here*/
+    border-color: #357ebd; 
 }
 
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active {
     color: #fff;
     background-color: #0b505f;
-    border-color: #285e8e; /*set the color you want here*/
+    border-color: #285e8e; 
 }

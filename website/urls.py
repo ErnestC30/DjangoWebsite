@@ -7,6 +7,4 @@ urlpatterns = [
     path('recent-activity/', views.recent_activity, name='recent-activity'),
     path('post/<int:post_id>', views.view_post, name='view-post'),
     path('post/<int:post_id>/delete', views.delete_comment, name='delete-comment')
-    #path('images', views.images, name='web-image-search'),
-    #path('videos', views.videos, name='web-video-search')
 ]

@@ -44,7 +44,6 @@
 }
 
 /* CSS flexbox container for profile page. */
-
 .user-feed {
     position:relative;
     padding-top: 70px;
@@ -59,7 +58,6 @@
 }
 
 /* CSS for user's comment posts. */
-
 .comment-post {
     border: 2px;
     border-style: groove;

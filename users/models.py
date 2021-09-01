@@ -3,7 +3,8 @@ from django.contrib.auth.models import User
 from PIL import Image
 
 class Profile(models.Model):
-    #Inherit from the default user model
+    """Extension of default User model.
+       Adds a profile image and description."""
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     image = models.ImageField(default='default.jpg', upload_to='profile_pics')
     description = models.TextField(default='Add description here.')
@@ -12,6 +13,7 @@ class Profile(models.Model):
         return f'{self.user.username} Profile'
 
     def save(self, *args, **kwargs):
+        """Decrease the image size for user profile."""
         super().save(*args, **kwargs)
         img = Image.open(self.image.path)
         if img.height > 300 or img.width > 300:
