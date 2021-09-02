@@ -1,0 +1,46 @@
+[
+    {
+        "model": "website.media",
+        "pk": 1,
+        "fields": {
+            "title": "Post 1",
+            "media": "default_pic.jpg",
+            "author_id": 1,
+            "type": "image",
+            "description": "Test Post 1 - Image"
+            }
+    },
+    {
+        "model": "website.media",
+        "pk": 2,
+        "fields": {
+            "title": "Post 2",
+            "media": "default_gif.gif",
+            "author_id": 1,
+            "type": "image",
+            "description": "Test Post 2 - GIF"
+            }
+    },
+    {
+        "model": "website.media",
+        "pk": 3,
+        "fields": {
+            "title": "Post 3",
+            "media": "default_vid.mp4",
+            "author_id": 1,
+            "type": "video",
+            "description": "Test Post 3 - Video"
+            }
+    },
+    {
+        "model": "website.media",
+        "pk": 4,
+        "fields": {
+            "title": "Post 4",
+            "media": "default_thumbnail.jpg",
+            "author_id": 1,
+            "type": "image",
+            "description": "Test Post 4 - Small Pic"
+            }
+    }
+]

@@ -2,11 +2,13 @@ from django.db import models
 from django.contrib.auth.models import User
 from PIL import Image
 
+DEFAULT_IMAGE = 'default_thumbnail.jpg'
+
 class Profile(models.Model):
     """Extension of default User model.
        Adds a profile image and description."""
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    image = models.ImageField(default='default.jpg', upload_to='profile_pics')
+    image = models.ImageField(default=DEFAULT_IMAGE, upload_to='profile_pics')
     description = models.TextField(default='Add description here.')
 
     def __str__(self):

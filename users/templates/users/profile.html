@@ -10,53 +10,53 @@
     <img class='display-pic' src='{{ user.profile.image.url }}'>
     <p class='user-name'>User: {{ user.username }}</p>
     <p class='user-desc'>{{ user.profile.description }}</p>
-</div>
-<div class='user-feed'>
-    <h1>User Feed</h1>
-    <div class='profile-media-container'>
-        {% for content in content_list %}
-        {% if content.content_type.name == 'media' %}
-        <!--Media Content-->
-        {% load contenttype_helper %}
-        {% with content|return_object as media %}
-        <div class='media-post'>
-            {% if media.type == 'image' %}
-            <img class='media-thumbnail' src="{{ media.media.url }}">
-            {% elif media.type == 'video' %}
-            <video class='media-thumbnail' controls>
-                <source src="{{ media.media.url }}" type="video/mp4">Video not available
-            </video>
-            {% else %}
-            <p>Error with media type.</p>
-            {% endif %}
-            <div class='text-box'>
-                <p class='media-title'><a class='post-link' href="{% url 'view-post' media.id %}">{{ media.title }}</a></p>
-                <p class='media-desc'>{{ media.description }}</p>
-            </div>
-        </div>
-        {% endwith %}
-        <!--Comment Content-->
-        {% elif content.content_type.name == 'post' %}
-        {% with content|return_object as post %}
-        <div class='comment-post'>
-            <div class='comment-media-info'>
-                {% if post.posted_to.type == 'image' %}
-                <img class='comment-media' src="{{ post.posted_to.media.url }}">
-                {% elif post.posted_to.type == 'video' %}
-                <video class='comment-media' controls>
-                    <source src="{{ post.posted_to.media.url }}" type="video/mp4">Video not available
+    <div class='user-feed'>
+        <h1>User Feed</h1>
+        <div class='profile-media-container'>
+            {% for content in content_list %}
+            {% if content.content_type.name == 'media' %}
+            <!--Media Content-->
+            {% load contenttype_helper %}
+            {% with content|return_object as media %}
+            <div class='media-post'>
+                {% if media.type == 'image' %}
+                <img class='media-thumbnail' src="{{ media.media.url }}">
+                {% elif media.type == 'video' %}
+                <video class='media-thumbnail' controls>
+                    <source src="{{ media.media.url }}" type="video/mp4">Video not available
                 </video>
+                {% else %}
+                <p>Error with media type.</p>
                 {% endif %}
-                <p class='comment-info'>Commented on: <a class='post-link'
-                        href="{% url 'view-post' post.posted_to.id %}">{{ post.posted_to.title }}</a></p>
+                <div class='text-box'>
+                    <p class='media-title'><a class='post-link' href="{% url 'view-post' media.id %}">{{ media.title }}</a></p>
+                    <p class='media-desc'>{{ media.description }}</p>
+                </div>
             </div>
-            <div class='comment'>
-                <p>{{ post.content }}</p>
+            {% endwith %}
+            <!--Comment Content-->
+            {% elif content.content_type.name == 'post' %}
+            {% with content|return_object as post %}
+            <div class='comment-post'>
+                <div class='comment-media-info'>
+                    {% if post.posted_to.type == 'image' %}
+                    <img class='comment-media' src="{{ post.posted_to.media.url }}">
+                    {% elif post.posted_to.type == 'video' %}
+                    <video class='comment-media' controls>
+                        <source src="{{ post.posted_to.media.url }}" type="video/mp4">Video not available
+                    </video>
+                    {% endif %}
+                    <p class='comment-info'>Commented on: <a class='post-link'
+                            href="{% url 'view-post' post.posted_to.id %}">{{ post.posted_to.title }}</a></p>
+                </div>
+                <div class='comment'>
+                    <p>{{ post.content }}</p>
+                </div>
             </div>
+            {% endwith %}
+            {% endif %}
+            {% endfor %}
         </div>
-        {% endwith %}
-        {% endif %}
-        {% endfor %}
     </div>
 </div>
 <div class='page-buttons'>
