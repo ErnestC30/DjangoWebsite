@@ -7,6 +7,7 @@ This website allows users to create an account where they can then upload a medi
 
 **How to Use**</br>
 This project requires installation of the modules shown in *requirements.txt*.</br>
+In *settings.py*, replace `SECRET_KEY=sec_key` with your own django secret key.</br>
 The server is started using `python manage.py runserver`.</br>
 A superuser/admin account can be created using `python manage.py createsuperuser`.</br>
 A sample json file *media_test_data.json* can be loaded into the database once an account has been made using `python manage.py loaddata media_test_data`.</br>
