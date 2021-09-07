@@ -5,6 +5,14 @@ I created a sample blog-like website using Django, Python, Javascript, Bootstrap
 The project was started as an introduction to Django, learning to make use of its built in tools such as the database, signals, models, and template rendering.
 This website allows users to create an account where they can then upload a media file. The media file can either be an image, a GIF, or a video, along with a description for their post. Every media upload by all users will be displayed in the 'recent activity' page, where any logged in or anonymous user can view the post. The media post can then be clicked on for a larger picture or video, where any user can view comments on that post and logged in users can comment on the media post. Logged in users can also delete their own media posts or their own comments. Users can also click on a person's name to view their profile page. The profile page comes with a user's display picture as well as a description for themselves. The profile page also show's the user's feed which shows their recent uploads and comments. Lastly, a logged in user can edit their own profile, changing their username, description, or change the display picture.
 
+**Sample Images**</br>
+Recent Activity Page
+![Sample Images](https://github.com/ErnestC30/DjangoWebsite/blob/master/sample_images/sample.PNG)
+Upload Page
+![Sample Images](https://github.com/ErnestC30/DjangoWebsite/blob/master/sample_images/sample2.PNG)
+Profile Page
+![Sample Images](https://github.com/ErnestC30/DjangoWebsite/blob/master/sample_images/sample3.PNG)
+
 **How to Use**</br>
 This project requires installation of the modules shown in *requirements.txt*.</br>
 In *settings.py*, replace `SECRET_KEY=sec_key` with your own django secret key.</br>
